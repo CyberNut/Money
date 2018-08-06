@@ -10,5 +10,8 @@ public class User {
         this.name = name;
     }
 
-
+    @Override
+    public String toString() {
+        return "[Login: " + login + " name: " + name + "]";
+    }
 }
