@@ -1,5 +1,8 @@
 package model;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -21,9 +24,11 @@ public class DBHelper {
     }
 
     public static Connection getConnection() {
-        if(connection == null) {
+        if (connection == null) {
             try {
                 connection = DriverManager.getConnection(connectionString, dbUser, dbUserPassword);
+                prepareTables();
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -39,5 +44,34 @@ public class DBHelper {
             e.printStackTrace();
         }
         connection = getConnection();
+    }
+
+    private static String readFile(String fileName) {
+        java.net.URL url = DBHelper.class.getResource(fileName);
+        java.nio.file.Path resPath = null;
+        try {
+            resPath = java.nio.file.Paths.get(url.toURI());
+            return new String(java.nio.file.Files.readAllBytes(resPath), "UTF8");
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private static boolean prepareTables() {
+        String createSQL = readFile("create.sql");
+        try {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(createSQL);
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Something is wrong!");
+            e.printStackTrace();
+            return false;
+        }
     }
 }
