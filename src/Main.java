@@ -1,13 +1,27 @@
+import controller.Controller;
+import controller.IController;
 import model.*;
+import view.AuthorizationWindow;
 
 import java.sql.Connection;
 
 public class Main {
     public static void main(String[] args) {
-        DBHelper dbHelper = DBHelper.getInstance();
-        test(DBHelper.getConnection());
+
+        IController controller = new Controller();
+        authoriseUser(controller);
+//        DBHelper dbHelper = DBHelper.getInstance();
+//        test(DBHelper.getConnection());
 
     }
+
+    private static void authoriseUser(IController controller) {
+        AuthorizationWindow dialog = new AuthorizationWindow(controller);
+        dialog.pack();
+        dialog.setVisible(true);
+        System.exit(0);
+    }
+
 
     private static void test(Connection connection) {
 
