@@ -52,7 +52,9 @@ public class RegisterWindow extends JDialog {
     }
 
     private void onOK() {
-        // add your code here
+        if (controller.createUser(userName.getText(), password.getText())) {
+            MessageBox.show("Registration successful", "My finance");
+        }
         dispose();
     }
 

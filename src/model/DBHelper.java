@@ -74,4 +74,16 @@ public class DBHelper {
             return false;
         }
     }
+
+    public static void close(AutoCloseable res) {
+        if (res != null) {
+            try {
+                res.close();
+                res = null;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
