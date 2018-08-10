@@ -1,7 +1,10 @@
 package controller;
 
+import model.Account;
 import model.DBDataStore;
 import model.DataStore;
+
+import java.util.List;
 
 public class Controller implements IController {
 
@@ -19,5 +22,10 @@ public class Controller implements IController {
     @Override
     public boolean createUser(String userName, String password) {
         return dataStore.createUser(userName, password);
+    }
+
+    @Override
+    public List<Account> getAccounts() {
+        return dataStore.getAccounts();
     }
 }

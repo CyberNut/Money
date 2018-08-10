@@ -25,8 +25,8 @@ public class Main {
 
     private static void test(Connection connection) {
 
-        User andrey = new User("andrey", "Andrey");
-        User anna = new User("anna", "Anna");
+        User andrey = new User("andrey");
+        User anna = new User("anna");
 
         AccountsManager.addAccount(new Account( andrey, MoneyType.CASH, "Cash Andrey"));
         AccountsManager.addAccount(new Account(anna, MoneyType.CASHLESS, "Tinkoff black Anna"));

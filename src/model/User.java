@@ -2,16 +2,23 @@ package model;
 
 public class User {
 
-    private String login;
     private String name;
+    private String password;
 
-    public User(String login, String name) {
-        this.login = login;
+    public User(String name) {
         this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
     public String toString() {
-        return "[Login: " + login + " name: " + name + "]";
+        return "[Name: " + name + "]";
     }
 }

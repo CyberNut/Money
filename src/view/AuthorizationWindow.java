@@ -67,7 +67,10 @@ public class AuthorizationWindow extends JDialog {
     private void onOK() {
         if (!"".equals(userName.getText())) {
             if (controller.authoriseUser(userName.getText(), userPassword.getText())) {
-                MessageBox.show("Welcome to my finance", "My finance");
+                //MessageBox.show("Welcome to my finance", "My finance");
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.setController(controller);
+                mainWindow.open();
                 //dispose();
             } else {
                 MessageBox.show("Username or password is incorrect", "My finance");
