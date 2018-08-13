@@ -58,7 +58,7 @@ public class ArraysDataStore implements DataStore {
 
     @Override
     public boolean createUser(String userName, String password) {
-        if (findUserByName(userName) != null) {
+        if (findUserByName(userName) == null) {
             User tempUser = new User(userName);
             tempUser.setPassword(password);
             users.add(tempUser);
@@ -78,14 +78,13 @@ public class ArraysDataStore implements DataStore {
     }
 
     @Override
-    public boolean createAccount(String description, MoneyType moneyType, User user) {
+    public boolean createAccount(Account newAccount) {
         for (Account account : accounts) {
-            if (account.getName().equals(description) == true && account.getType() == moneyType && account.getUser() == user) {
+            if (account.getName().equals(newAccount.getName()) == true && account.getType() == newAccount.getType() && account.getUser() == newAccount.getUser()) {
                 return false;
             }
         }
-        Account tempAccount = new Account(user, moneyType, description);
-        accounts.add(tempAccount);
+        accounts.add(newAccount);
         return true;
     }
 

@@ -5,7 +5,6 @@ import model.Account;
 
 import java.util.List;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 
 public class MainWindow extends JDialog {
@@ -20,12 +19,20 @@ public class MainWindow extends JDialog {
     private JPanel topPanel;
     private JPanel operationPanel;
     private JButton buttonAddAccount;
+    private JMenuBar menuBar;
+    private JMenu menu;
+    private JMenuItem menuCategories;
+    private JMenuItem menuExit;
 
     public MainWindow(IController controller) {
         this.controller = controller;
         setContentPane(contentPane);
         setModal(true);
         setTitle("My finance");
+        setSize(1200, 700);
+        setLocationRelativeTo(null);
+        createMenu();
+
         getRootPane().setDefaultButton(buttonOK);
 
         buttonOK.addActionListener(new ActionListener() {
@@ -64,6 +71,32 @@ public class MainWindow extends JDialog {
         });
     }
 
+    private void createMenu() {
+        menuBar = new JMenuBar();
+        menu = new JMenu("Menu");
+        menuCategories = new JMenuItem("Categories");
+        menu.add(menuCategories);
+        menuCategories.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CategoriesListWindow categoriesListWindow = new CategoriesListWindow(controller);
+                categoriesListWindow.pack();
+                categoriesListWindow.setVisible(true);
+            }
+        });
+        menuExit = new JMenuItem("Exit");
+        menu.add(menuExit);
+        menuExit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+        menuBar.add(menu);
+        setJMenuBar(menuBar);
+
+    }
+
     private void onOK() {
         // add your code here
         dispose();
@@ -92,7 +125,12 @@ public class MainWindow extends JDialog {
     }
 
     public void open() {
-        cbAccounts = new JComboBox(getAccountNames(controller.getAccounts()));
+        String[] accountNames = getAccountNames(controller.getAccounts());
+        cbAccounts.removeAllItems();
+        cbAccounts = new JComboBox(accountNames);
+//        if (accountNames.length > 0) {
+//            cbAccounts.setSelectedIndex(0);
+//        }
         pack();
         setVisible(true);
     }

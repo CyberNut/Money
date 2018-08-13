@@ -9,7 +9,8 @@ public interface DataStore {
 
     User findUserByName(String userName);
 
-    boolean createAccount(String description, MoneyType moneyType, User user);
+    boolean createAccount(Account account);
+    //boolean createAccount(String description, MoneyType moneyType, User user);
     List<Account> getAccounts();
 
     boolean createCategory(String name);

@@ -74,7 +74,7 @@ public class DBDataStore implements DataStore {
     }
 
     @Override
-    public boolean createAccount(String description, String moneyType, String userName) {
+    public boolean createAccount(Account account) {
         return false;
     }
 

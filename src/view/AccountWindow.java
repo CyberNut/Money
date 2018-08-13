@@ -2,6 +2,8 @@ package view;
 
 import controller.IController;
 import model.Account;
+import model.MoneyType;
+import model.User;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -25,6 +27,7 @@ public class AccountWindow extends JDialog {
         setContentPane(contentPane);
         setModal(true);
         setTitle("Create new account");
+        setLocationRelativeTo(null);
         getRootPane().setDefaultButton(buttonOK);
 
         buttonOK.addActionListener(new ActionListener() {
@@ -70,9 +73,11 @@ public class AccountWindow extends JDialog {
             return;
         }
 
-        //Account newAccount = new Account();
-
-
+        User user = controller.getUserByName(textFieldUser.getText());
+        if (user != null) {
+            Account newAccount = new Account(user, textFieldMoneyType.getText().equals("CASH") ? MoneyType.CASH : MoneyType.CASHLESS, textFieldName.getText());
+            controller.addAccount(newAccount);
+        }
 
         dispose();
     }

@@ -1,19 +1,16 @@
 package controller;
 
-import model.Account;
-import model.Category;
-import model.DBDataStore;
-import model.DataStore;
+import model.*;
 
 import java.util.List;
 
 public class Controller implements IController {
 
     private static Controller instance;
-    private static DataStore dataStore;
+    private DataStore dataStore;
 
     private Controller() {
-        this.dataStore = new DBDataStore();
+
     }
 
     public static Controller getInstance() {
@@ -21,6 +18,16 @@ public class Controller implements IController {
             instance = new Controller();
         }
         return instance;
+    }
+
+    @Override
+    public DataStore getDataStore() {
+        return dataStore;
+    }
+
+    @Override
+    public void setDataStore(DataStore dataStore) {
+        this.dataStore = dataStore;
     }
 
     @Override
@@ -34,13 +41,18 @@ public class Controller implements IController {
     }
 
     @Override
+    public User getUserByName(String userName) {
+        return dataStore.findUserByName(userName);
+    }
+
+    @Override
     public List<Account> getAccounts() {
         return dataStore.getAccounts();
     }
 
     @Override
     public boolean addAccount(Account account) {
-        return false;
+        return dataStore.createAccount(account);
     }
 
     @Override

@@ -5,22 +5,21 @@ import controller.IController;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class RegisterWindow extends JDialog {
+public class CategoriesListWindow extends JDialog {
     private IController controller;
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JLabel labelTitle;
-    private JTextField userName;
-    private JTextField password;
-    private JLabel labelUserName;
-    private JLabel labelPassword;
+    private JTable tableCategories;
+    private JPanel topPanel;
+    private JPanel bottomPanel;
+    private JButton buttonAdd;
 
-    public RegisterWindow(IController controller) {
+    public CategoriesListWindow(IController controller) {
         this.controller = controller;
         setContentPane(contentPane);
-        setTitle("My finance: create new user");
         setModal(true);
+        setTitle("List of categories");
         setLocationRelativeTo(null);
         getRootPane().setDefaultButton(buttonOK);
 
@@ -53,9 +52,7 @@ public class RegisterWindow extends JDialog {
     }
 
     private void onOK() {
-        if (controller.createUser(userName.getText(), password.getText())) {
-            MessageBox.show("Registration successful", "My finance");
-        }
+        // add your code here
         dispose();
     }
 

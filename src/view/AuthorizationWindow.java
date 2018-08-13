@@ -24,6 +24,7 @@ public class AuthorizationWindow extends JDialog {
         setContentPane(contentPane);
         setTitle("My finance");
         setModal(true);
+        setLocationRelativeTo(null);
         getRootPane().setDefaultButton(buttonOK);
 
         buttonOK.addActionListener(new ActionListener() {
