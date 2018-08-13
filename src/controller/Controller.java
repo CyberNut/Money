@@ -8,10 +8,18 @@ import java.util.List;
 
 public class Controller implements IController {
 
-    DataStore dataStore;
+    private static Controller instance;
+    private static DataStore dataStore;
 
-    public Controller() {
+    private Controller() {
         this.dataStore = new DBDataStore();
+    }
+
+    public static Controller getInstance() {
+        if (instance == null) {
+            instance = new Controller();
+        }
+        return instance;
     }
 
     @Override

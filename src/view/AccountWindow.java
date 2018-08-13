@@ -3,29 +3,28 @@ package view;
 import controller.IController;
 import model.Account;
 
-import java.util.List;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 
-public class MainWindow extends JDialog {
+public class AccountWindow extends JDialog {
     private IController controller;
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JComboBox cbAccounts;
-    private JTable tableOperations;
+    private JTextField textFieldName;
+    private JTextField textFieldUser;
+    private JTextField textFieldMoneyType;
+    private JLabel labelAccountName;
+    private JLabel labelUser;
+    private JLabel labelMoneyType;
+    private JPanel bottomPanel;
     private JPanel mainPanel;
-    private JPanel innerPanel;
-    private JPanel topPanel;
-    private JPanel operationPanel;
-    private JButton buttonAddAccount;
 
-    public MainWindow(IController controller) {
+    public AccountWindow(IController controller) {
         this.controller = controller;
         setContentPane(contentPane);
         setModal(true);
-        setTitle("My finance");
+        setTitle("Create new account");
         getRootPane().setDefaultButton(buttonOK);
 
         buttonOK.addActionListener(new ActionListener() {
@@ -54,19 +53,6 @@ public class MainWindow extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-        buttonAddAccount.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                AccountWindow dialog = new AccountWindow(controller);
-                dialog.pack();
-                dialog.setVisible(true);
-            }
-        });
-    }
-
-    private void onOK() {
-        // add your code here
-        dispose();
     }
 
     public IController getController() {
@@ -77,23 +63,22 @@ public class MainWindow extends JDialog {
         this.controller = controller;
     }
 
-    private void onCancel() {
-        // add your code here if necessary
+    private void onOK() {
+
+        if ("".equals(textFieldName) == true || "".equals(textFieldMoneyType) == true || "".equals(textFieldUser) == true) {
+            MessageBox.show("Incorrect data", "My finance");
+            return;
+        }
+
+        //Account newAccount = new Account();
+
+
+
         dispose();
     }
 
-    private String[] getAccountNames(List<Account> accountList) {
-        String[] names = new String[accountList.size()];
-        int i = 0;
-        for (Account account : accountList) {
-            names[i++] = account.getName();
-        }
-        return names;
-    }
-
-    public void open() {
-        cbAccounts = new JComboBox(getAccountNames(controller.getAccounts()));
-        pack();
-        setVisible(true);
+    private void onCancel() {
+        // add your code here if necessary
+        dispose();
     }
 }

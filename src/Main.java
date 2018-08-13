@@ -8,7 +8,7 @@ import java.sql.Connection;
 public class Main {
     public static void main(String[] args) {
 
-        IController controller = new Controller();
+        IController controller = Controller.getInstance();
         authoriseUser(controller);
 //        DBHelper dbHelper = DBHelper.getInstance();
 //        test(DBHelper.getConnection());
