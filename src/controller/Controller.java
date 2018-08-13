@@ -1,6 +1,7 @@
 package controller;
 
 import model.Account;
+import model.Category;
 import model.DBDataStore;
 import model.DataStore;
 
@@ -35,5 +36,20 @@ public class Controller implements IController {
     @Override
     public List<Account> getAccounts() {
         return dataStore.getAccounts();
+    }
+
+    @Override
+    public boolean addAccount(Account account) {
+        return false;
+    }
+
+    @Override
+    public List<Category> getCategories() {
+        return null;
+    }
+
+    @Override
+    public boolean addCategory(Category category) {
+        return false;
     }
 }
